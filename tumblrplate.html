@@ -36,10 +36,6 @@
         {/block:HasPages}
       </ul>
     </nav>
-    <form action="/search" method="get" class="search">
-      <input type="text" name="q" value="{SearchQuery}" />
-      <input type="submit" value="{lang:Search}" />
-    </form>
   </header>
 
   <main class="posts">
@@ -165,20 +161,13 @@
     <p>{block:ShowTitle}{Title}{/block:ShowTitle}</p>
   </footer>
 
-  {block:IfGoogleAnalyticsID}
-  <script>
-    var _gaq = [
-    ['_setAccount', '{text:Google Analytics ID}'],
-    ['_trackPageview']
-    ];
-    (function(d, t) {
-      var g = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-      g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g, s)
-    }(document, 'script'));
-  </script>
-  {/block:IfGoogleAnalyticsID}
+{block:IfGoogleAnalyticsID}
+<script>
+  var _gaq = [['_setAccount', '{text:Google Analytics ID}'],['_trackPageview']];
+  (function(d, t) {var g = d.createElement(t),s = d.getElementsByTagName(t)[0];
+  g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';s.parentNode.insertBefore(g, s)}(document, 'script'));
+</script>
+{/block:IfGoogleAnalyticsID}
 
 </body>
 </html>
