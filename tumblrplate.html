@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{Title}{block:PostTitle} &mdash; {PostTitle}{/block:PostTitle}</title>
+  <link rel="shortcut icon" href="{Favicon}">
+  <link rel="canonical" href="{block:IndexPage}{BlogURL}{/block:IndexPage}{block:PermalinkPage}{Permalink}{/block:PermalinkPage}">
+  <meta name="viewport" content="width=device-width">
+  {block:Description}<meta name="description" content="{MetaDescription}">{/block:Description}
+  <link rel="alternate" type="html/rss+xml" href="{RSS}">
+  {block:Hidden}
+  <!--Custom theme options-->
+  {/block:Hidden}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" type="text/css" media="all">
+  <style>
+  body {background-color: {BackgroundColor};}
+  a {color: {TitleColor};}
+  a:hover {color: {AccentColor};}
+  {CustomCSS}
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><a href="/">{Title}</a></h1>
+    {block:Description}
+    <p id="description">{Description}</p>
+    {/block:Description}
+    <nav class="navigation">
+      <ul>
+        {block:HasPages}
+        {block:Pages}
+        <li><a href="{URL}">{Label}</a></li>
+        {/block:Pages}
+        {/block:HasPages}
+      </ul>
+    </nav>
+    <form action="/search" method="get" class="search">
+      <input type="text" name="q" value="{SearchQuery}" />
+      <input type="submit" value="{lang:Search}" />
+    </form>
+  </header>
+
+  <main class="posts">
+    {block:Posts}
+
+    {block:Text}
+    <article class="{PostType}">
+      {block:Title}<h2>{Title}</h2>{/block:Title}
+      {block:Body}<p>{Body}</p>{/block:Body}
+    </article>
+    {/block:Text}
+
+    {block:Link}
+    <article class="{PostType}">
+      <h2><a href="{URL}" {Target}>{Name}</a></h2>
+      {block:Description}<p>{Description}</p>{/block:Description}
+    </article>
+    {/block:Link}
+
+    {block:Quote}
+    <article class="{PostType}">
+      <blockquote>&#8220;{Quote}&#8221;</blockquote>
+      {block:Source}<p>&mdash; {Source}</p>{/block:Source}
+    </article>
+    {/block:Quote}
+
+    {block:Photo}
+    <figure class="{PostType}">
+      {LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{linkCloseTag}
+      {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Photo}
+
+    {block:Photoset}
+    <figure>
+      {block:Photos}
+      <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>
+      {block:Caption}<p>{Caption}</p>{/block:Caption}
+      {/block:Photos}
+      {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Photoset}
+
+    {block:Video}
+    <figure class="{PostType}">
+      {Video-700}
+      {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Video}
+
+    {block:Panorama}
+    <figure class="{PostType}">
+      {LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" width="{PhotoWidth-Panorama}" height="{PhotoHeight-Panorama}">{linkCloseTag}
+      {block:Caption}<figcaption>{Caption}</figcaption>{/block:Caption}
+    </figure>
+    {/block:Panorama}
+
+    {block:Chat}
+    <article class="{PostType}">
+      {block:Title}<h2>{Title}</h2>{/block:Title}
+      <ul class="conversation">
+        {block:Lines}
+        <li>
+          {block:Label}<p class="person">{Label}</p>{/block:Label}
+          <h3>{Line}</h3>
+        </li>
+        {/block:Lines}
+      </ul>
+    </article>
+    {/block:Chat}
+
+    {block:Audio}
+    {block:AlbumArt}<img src="{AlbumArtURL}">{/block:AlbumArt}
+    <article>
+      {block:AudioEmbed}
+      {AudioEmbed color="white"}
+      {/block:AudioEmbed}
+      {block:AudioPlayer}{AudioPlayerBlack}{/block:AudioPlayer}
+    </article>
+    {block:Caption}<p>{Caption}</p>{/block:Caption}
+    {/block:Audio}
+
+    {block:Answer}
+    <section class="question_wrap">
+      <img src="{AskerPortraitURL-48}">
+      <p class="asker">{Asker}:</p>
+      <p class="question">{Question}</p>
+    </section>
+    {block:Answerer}
+    <section class="answer_wrap">
+      <img src="{AnswererPortraitURL-48}">
+      <p class="answerer">{Answerer}:</p>
+      <p class="answer">{Answer}</p>
+    </section>
+    {/block:Answerer}
+    {/block:Answer}
+
+    {/block:Posts}
+  </main>
+
+  <footer>
+    {block:PermalinkPagination}
+    <nav class="pagination">
+      <ul>
+        {block:PreviousPost}<li><a href="{PreviousPost}">{lang:Previous post}</a></li>{/block:PreviousPost}
+        {block:NextPost}<li><a href="{NextPost}">{lang:Next post}</a></li>{/block:NextPost}
+      </ul>
+    </nav>
+    {/block:PermalinkPagination}
+
+    {block:Pagination}
+    <nav class="pagination">
+      <ul>
+        {block:PreviousPage}<li><a class="prev" href="{PreviousPage}">{lang:Previous}</a></li>{/block:PreviousPage}
+        {block:JumpPagination length="5"}
+        {block:CurrentPage}<p class="current_page">{PageNumber}</p>{/block:CurrentPage}
+        {block:JumpPage}<li><a href="{URL}">{PageNumber}</a></li>{/block:JumpPage}
+        {/block:JumpPagination}
+        {block:NextPage}<li><a href="{NextPage}">{lang:Next}</a></li>{/block:NextPage}
+      </ul>
+    </nav>
+    {/block:Pagination}
+    <p>{block:ShowTitle}{Title}{/block:ShowTitle}</p>
+  </footer>
+
+  {block:IfGoogleAnalyticsID}
+  <script>
+    var _gaq = [
+    ['_setAccount', '{text:Google Analytics ID}'],
+    ['_trackPageview']
+    ];
+    (function(d, t) {
+      var g = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+      g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g, s)
+    }(document, 'script'));
+  </script>
+  {/block:IfGoogleAnalyticsID}
+
+</body>
+</html>
